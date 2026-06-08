@@ -6,9 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
-## [0.1.0] - 2026-06-08
+## [0.1.1] - 2026-06-08
 
-Initial public release of `@twilic/fastify`.
+Initial public release of `@twilic/fastify`. Version 0.1.0 was published locally without npm trusted publishing and is not part of the canonical release line.
 
 ### Added
 

@@ -45,8 +45,8 @@ body:
       description: Runtime version, OS, and package versions.
       placeholder: |
         - Node.js: 24.x
-        - @twilic/hono: 0.1.0
-        - hono: 4.x
+        - @twilic/fastify: 0.1.1
+        - fastify: 5.x
         - @twilic/core: 3.x
         - OS: macOS 15
     validations:

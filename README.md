@@ -62,8 +62,8 @@ Release steps:
 Example:
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
+git tag v0.1.1
+git push origin v0.1.1
 ```
 
 The workflow `.github/workflows/publish-npm.yml` verifies tag/version match, runs tests, and then runs `npm publish` (OIDC authentication via `id-token: write`).
