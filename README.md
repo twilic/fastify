@@ -35,6 +35,15 @@ app.get("/ping", (_request, reply) => reply.twilic({ pong: true }));
 - `twilicPlugin`
 - `createTwilicFastify(codec?)`
 
+## Runnable example
+
+```bash
+pnpm example:http-roundtrip:fastify  # Fastify server (in twilic/examples)
+pnpm example:http-roundtrip:client
+```
+
+See [`http-roundtrip/`](https://github.com/twilic/examples/tree/main/http-roundtrip).
+
 ## Changelog
 
 See [docs/CHANGELOG.md](docs/CHANGELOG.md).

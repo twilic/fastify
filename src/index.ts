@@ -5,6 +5,7 @@ import type {
   preHandlerAsyncHookHandler,
 } from "fastify";
 import fp from "fastify-plugin";
+import "./types.js";
 
 export const TWILIC_CONTENT_TYPE = "application/vnd.twilic";
 
