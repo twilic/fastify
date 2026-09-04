@@ -1,6 +1,8 @@
-import { test } from "node:test";
 import assert from "node:assert/strict";
+import { test } from "node:test";
+
 import { decode, encode } from "@twilic/core";
+
 import {
   TWILIC_CONTENT_TYPE,
   parseTwilic,
@@ -25,7 +27,7 @@ test("twilicParser + twilicReply round-trip with @twilic/core", async () => {
       { preHandler: twilicParser() },
       (request, reply) => {
         return twilicReply(reply, { received: request.twilicBody });
-      },
+      }
     );
   });
 

@@ -8,14 +8,14 @@
     "plugin",
     "twilic"
   ],
+  "homepage": "https://github.com/twilic/fastify#readme",
+  "bugs": {
+    "url": "https://github.com/twilic/fastify/issues"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/twilic/fastify.git"
-  },
-  "homepage": "https://github.com/twilic/fastify#readme",
-  "bugs": {
-    "url": "https://github.com/twilic/fastify/issues"
   },
   "files": [
     "dist",
@@ -47,6 +47,9 @@
     "release:check": "node ./scripts/verify-tag-version.mjs",
     "prepare": "husky"
   },
+  "dependencies": {
+    "fastify-plugin": "^5.0.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
@@ -55,12 +58,10 @@
     "fastify": "^5.0.0",
     "fastify-plugin": "^5.0.0",
     "husky": "^9.1.7",
-    "oxfmt": "^0.50.0",
-    "oxlint": "^1.65.0",
-    "typescript": "^5.8.2"
-  },
-  "dependencies": {
-    "fastify-plugin": "^5.0.0"
+    "oxfmt": "^0.66.0",
+    "oxlint": "^1.81.0",
+    "typescript": "^5.8.2",
+    "ultracite": "7.10.7"
   },
   "peerDependencies": {
     "@twilic/core": "^3.0.0",

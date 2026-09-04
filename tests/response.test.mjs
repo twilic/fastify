@@ -1,6 +1,8 @@
-import { test } from "node:test";
 import assert from "node:assert/strict";
+import { test } from "node:test";
+
 import { decode } from "@twilic/core";
+
 import {
   createTwilicFastify,
   twilicPlugin,
@@ -27,7 +29,7 @@ test("twilicReply sets status, content-type, and custom headers", async () => {
         {
           statusCode: 201,
           headers: { "x-id": "1" },
-        },
+        }
       );
     });
   });
@@ -42,7 +44,7 @@ test("twilicReply encodes with @twilic/core", async () => {
   const app = await createTestApp(async (instance) => {
     await instance.register(twilicPlugin);
     instance.get("/users", (_request, reply) =>
-      twilicReply(reply, { ok: true, n: 1n }),
+      twilicReply(reply, { ok: true, n: 1n })
     );
   });
 
@@ -55,7 +57,7 @@ test("reply.twilic decorator uses plugin codec", async () => {
   const app = await createTestApp(async (instance) => {
     await instance.register(twilicPlugin);
     instance.get("/users", (_request, reply) =>
-      reply.twilic({ via: "decorator" }),
+      reply.twilic({ via: "decorator" })
     );
   });
 
@@ -71,8 +73,8 @@ test("twilicReply overwrites caller content-type with Twilic", async () => {
       twilicReply(
         reply,
         { ok: true },
-        { headers: { "content-type": "application/json" } },
-      ),
+        { headers: { "content-type": "application/json" } }
+      )
     );
   });
 
@@ -86,7 +88,7 @@ test("createTwilicFastify().reply uses injected codec", async () => {
   const app = await createTestApp(async (instance) => {
     await instance.register(twilicPlugin);
     instance.get("/x", (_request, reply) =>
-      twilic.reply(reply, { via: "factory" }),
+      twilic.reply(reply, { via: "factory" })
     );
   });
 

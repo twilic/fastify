@@ -1,5 +1,6 @@
-import { test } from "node:test";
 import assert from "node:assert/strict";
+import { test } from "node:test";
+
 import {
   createTwilicFastify,
   twilicParser,
@@ -33,7 +34,7 @@ test("twilicParser decodes request body into request.twilicBody", async () => {
       { preHandler: twilic.parser() },
       (request, reply) => {
         return reply.send(request.twilicBody);
-      },
+      }
     );
   });
 
@@ -57,7 +58,7 @@ test("accepts content-type with parameters", async () => {
       { preHandler: twilic.parser() },
       (request, reply) => {
         return reply.send(request.twilicBody);
-      },
+      }
     );
   });
 
@@ -81,7 +82,7 @@ test("returns 415 when content-type is missing", async () => {
       { preHandler: twilic.parser() },
       (_request, reply) => {
         return reply.send("ok");
-      },
+      }
     );
   });
 
@@ -104,7 +105,7 @@ test("returns 415 when content-type is not Twilic", async () => {
       { preHandler: twilic.parser() },
       (_request, reply) => {
         return reply.send("ok");
-      },
+      }
     );
   });
 
@@ -126,12 +127,12 @@ test("requireContentType false skips validation", async () => {
     instance.addContentTypeParser(
       "application/json",
       { parseAs: "buffer" },
-      (_request, body, done) => done(null, body),
+      (_request, body, done) => done(null, body)
     );
     instance.post(
       "/users",
       { preHandler: twilic.parser({ requireContentType: false }) },
-      (request, reply) => reply.send(request.twilicBody),
+      (request, reply) => reply.send(request.twilicBody)
     );
   });
 
@@ -155,7 +156,7 @@ test("decodes empty body when content-type is valid", async () => {
       { preHandler: twilic.parser() },
       (request, reply) => {
         return reply.send(request.twilicBody ?? null);
-      },
+      }
     );
   });
 
@@ -180,7 +181,7 @@ test("uses injected codec decode", async () => {
       { preHandler: twilic.parser() },
       (request, reply) => {
         return reply.send(request.twilicBody);
-      },
+      }
     );
   });
 
@@ -212,7 +213,7 @@ test("propagates decode errors from codec", async () => {
       { preHandler: twilic.parser() },
       (_request, reply) => {
         return reply.send("ok");
-      },
+      }
     );
   });
 
@@ -236,7 +237,7 @@ test("twilicParser() decodes @twilic/core wire bytes", async () => {
       { preHandler: twilicParser() },
       (request, reply) => {
         return twilicReply(reply, { received: request.twilicBody });
-      },
+      }
     );
   });
 

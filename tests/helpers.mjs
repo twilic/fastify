@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
+
 import Fastify from "fastify";
+
 import { TWILIC_CONTENT_TYPE } from "../dist/index.js";
 
 const encoder = new TextEncoder();

@@ -5,6 +5,7 @@ import type {
   preHandlerAsyncHookHandler,
 } from "fastify";
 import fp from "fastify-plugin";
+
 import "./types.js";
 
 export const TWILIC_CONTENT_TYPE = "application/vnd.twilic";
@@ -32,13 +33,13 @@ export interface TwilicFastify<T = TwilicValue> {
   reply: (
     reply: FastifyReply,
     value: TwilicValue,
-    init?: TwilicReplyInit,
+    init?: TwilicReplyInit
   ) => FastifyReply;
   parser: (options?: TwilicParserOptions) => preHandlerAsyncHookHandler;
 }
 
 function normalizeContentType(
-  contentType: string | string[] | undefined,
+  contentType: string | string[] | undefined
 ): string | undefined {
   if (Array.isArray(contentType)) {
     return contentType[0];
@@ -47,7 +48,7 @@ function normalizeContentType(
 }
 
 function hasTwilicContentType(
-  contentType: string | string[] | undefined,
+  contentType: string | string[] | undefined
 ): boolean {
   return (
     normalizeContentType(contentType)?.startsWith(TWILIC_CONTENT_TYPE) ?? false
@@ -72,10 +73,10 @@ async function readRequestBody(request: FastifyRequest): Promise<Buffer> {
 
 function parseWithCodec<T>(
   codec: TwilicCodec,
-  request: FastifyRequest,
+  request: FastifyRequest
 ): Promise<T> {
   return readRequestBody(request).then(
-    (body) => codec.decode(new Uint8Array(body)) as T,
+    (body) => codec.decode(new Uint8Array(body)) as T
   );
 }
 
@@ -83,7 +84,7 @@ function replyWithCodec(
   codec: TwilicCodec,
   reply: FastifyReply,
   value: TwilicValue,
-  init?: TwilicReplyInit,
+  init?: TwilicReplyInit
 ): FastifyReply {
   const body = Buffer.from(codec.encode(value));
   if (init?.statusCode !== undefined) {
@@ -99,7 +100,7 @@ function replyWithCodec(
 
 function parserWithCodec<T>(
   codec: TwilicCodec,
-  options?: TwilicParserOptions,
+  options?: TwilicParserOptions
 ): preHandlerAsyncHookHandler {
   const requireContentType = options?.requireContentType ?? true;
 
@@ -120,7 +121,7 @@ const defaultCodec: TwilicCodec = {
 };
 
 export function createTwilicFastify<T = TwilicValue>(
-  codec: TwilicCodec = defaultCodec,
+  codec: TwilicCodec = defaultCodec
 ): TwilicFastify<T> {
   return {
     parse: (request) => parseWithCodec<T>(codec, request),
@@ -130,7 +131,7 @@ export function createTwilicFastify<T = TwilicValue>(
 }
 
 export function parseTwilic<T = TwilicValue>(
-  request: FastifyRequest,
+  request: FastifyRequest
 ): Promise<T> {
   return parseWithCodec<T>(defaultCodec, request);
 }
@@ -138,13 +139,13 @@ export function parseTwilic<T = TwilicValue>(
 export function twilicReply(
   reply: FastifyReply,
   value: TwilicValue,
-  init?: TwilicReplyInit,
+  init?: TwilicReplyInit
 ): FastifyReply {
   return replyWithCodec(defaultCodec, reply, value, init);
 }
 
 export function twilicParser<T = TwilicValue>(
-  options?: TwilicParserOptions,
+  options?: TwilicParserOptions
 ): preHandlerAsyncHookHandler {
   return parserWithCodec<T>(defaultCodec, options);
 }
@@ -158,7 +159,7 @@ export const twilicPlugin = fp<TwilicPluginOptions>(
       { parseAs: "buffer" },
       (_request, body, done) => {
         done(null, body);
-      },
+      }
     );
 
     fastify.addContentTypeParser(
@@ -166,7 +167,7 @@ export const twilicPlugin = fp<TwilicPluginOptions>(
       { parseAs: "buffer" },
       (_request, body, done) => {
         done(null, body);
-      },
+      }
     );
 
     fastify.decorateRequest("twilicBody", null);
@@ -176,13 +177,13 @@ export const twilicPlugin = fp<TwilicPluginOptions>(
       function twilic(
         this: FastifyReply,
         value: TwilicValue,
-        init?: TwilicReplyInit,
+        init?: TwilicReplyInit
       ) {
         return replyWithCodec(codec, this, value, init);
-      },
+      }
     );
   },
   {
     name: "@twilic/fastify",
-  },
+  }
 );
