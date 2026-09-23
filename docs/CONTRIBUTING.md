@@ -16,16 +16,16 @@ Keep changes aligned with the normative spec in [twilic/twilic](https://github.c
 Requirements:
 
 - Node.js 24+
-- pnpm 10+
+- Bun 1.4.2
 
 javascript, typescript, json, and markdown formatting uses oxfmt with the shared ultracite preset.
 
 ```bash
-pnpm install
-pnpm build
-pnpm test
-pnpm fmt:check
-pnpm lint
+bun install
+bun run build
+bun run test
+bun run fmt:check
+bun run lint
 ```
 
 ## Commit Messages
@@ -39,7 +39,7 @@ Use the pull request template and fill in every required section. PR bodies are 
 ## Contribution Checklist
 
 - Tests added or updated for behavior changes
-- `pnpm test`, `pnpm fmt:check`, and `pnpm lint` pass locally
+- `bun run test`, `bun run fmt:check`, and `bun run lint` pass locally
 - Documentation updated when the public API changes
 - Commit messages follow Conventional Commits
 
